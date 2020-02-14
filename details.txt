@@ -1,0 +1,156 @@
+	# Spread and Rest Syntax
+	Refer
+#JavaScript ES6 <= Introduced In
+
+Spread Syntax: making code clean and easy to understand
+Spread syntax allows an iterable such as an array expression or string to be expanded in places where zero or more arguments ( for fun call and and array literals) are expected, or object with zero or more key value pair expected.
+
+The spread operator is just 3 dots ...
+it can be used on iterables like an array or a string.
+it expands and iterable on its individual elements.
+```
+function sum(a,b,c){
+    return a+b+c;
+}
+const numbers= [1,2,3];
+console.log(sum.apply(null,numbers));   // 6
+```
+This is a simple example: apply() method is used before to pass an array to a function.
+Now With the help of spread operator it can be done very easily and in a clean way.
+```
+function sum(x,y,z){
+    return x+y+z;
+}
+const numbers= [1,2,3];
+console.log(sum(...numbers));    //6
+```
+using Object.entries()
+```
+function sum() {
+    for (let [key, val] of Object.entries(arguments)) {
+        console.log(key, val);  //0:1  1:2   2:3
+    }
+}
+const numbers = [1, 2, 3];
+sum(...numbers)
+```
+Loop Analogy:   ( Aise hi bs samajh lo)
+```
+var arr = [3, 5, 7];
+arr.foo = "hello";
+
+for (var i in arr) {
+  console.log(i); // logs "0", "1", "2", "foo"
+}
+
+for (var i of arr) {
+  console.log(i); // logs "3", "5", "7"
+  // it is does not log "3", "5", "7", "hello"
+}
+```
+So we understood that there is no need to use apply() method. means spread operator saves us from writing more code.
+When we use ... 3 dots in function calling then it is called rest parameter:
+Example:  
+```
+function xyz(...args)
+```
+>
+```
+[...arr, "abc", "def"]     // ...arr is a different array 
+```
+
+Variadic Function:
+... is used as an argument for a variadic function.      
+A variadic is a function which can have variable number of parameters.
+
+```
+function getArr(...args){
+    return args;
+}
+const number=[1,2,3,4,5];
+console.log(getArr(...number));   //[1,2,3,4,5]
+```
+We get our array back.
+Means: 3 dots ... now being used as rest parameter which is giving back all values. This shows that the rest operator actually works exactly opposite of the spread syntax.
+
+One expands and one condenses the value.
+
+About Function: They are variadic functions as the numbers of inputs can be infinite for them.
+
+
+Using Spread Operator in array.push:
+As we know that using array.push we can only push one element one by one.
+If there is an array whose elements are to be inserted in the array using push we will get a multi dimension array, then?
+```
+var arr=[1,2,3];
+arr.push([4,5,6]);
+console.log(arr);       //[ 1, 2, 3, [ 4, 5, 6 ] ]
+```
+
+Then apply comes and overcome this problem:
+
+```
+var arr=[1,2,3];
+arr.push.apply(arr,[4,5,6]);
+console.log(arr);                // [ 1, 2, 3, 4, 5, 6 ]
+```
+
+And then comes spread operator and made it more easy:    M  A  G  I  C
+```
+var arr=[1,2,3];
+var arr2=[4,5,6];
+arr.push(...arr2)
+console.log(arr);  // [ 1, 2, 3, 4, 5, 6 ]
+```
+Now let's copy an array:
+
+```
+var arr=[1,2,3];
+var arr2=[4,5,6];
+arr=[...arr2]
+console.log(arr);    //[4,5,6];
+```
+Same thing we can do with the help of an object:
+```
+var obj= {
+    name: "Ashu",
+    no: 123
+};
+var newObj= {...obj}
+console.log(newObj);   //{ name: 'Ashu', no: 123 }
+```
+ Concatenate Array:
+Simple: 
+```
+var a=[1,2];
+var b= [3,4,5];
+console.log(a.concat(b));   //[ 1, 2, 3, 4, 5 ]
+```
+Using ... operator:
+```
+var a=[1,2,3,4];
+var b= [5,6,7];
+console.log([...a,...b]);   // [ 1, 2, 3, 4, 5, 6, 7]
+```
+
+Converting String to an array:
+Simple:
+```
+var s= "hello";
+var a= s.split('');
+console.log(a);     //[ 'h', 'e', 'l', 'l', 'o' ]
+```
+Using ... operator:
+```
+var s= "ASHU";
+var a=[...s]
+console.log(a);         // [ 'A', 'S', 'H', 'U' ]
+```
+How to use ... in Math.min and Math.max method:
+```
+var arr= [1,2,3,4,5,6,7,8,9,0];
+console.log(Math.min(...arr));   //0
+console.log(Math.max(...arr));   //1
+```
+
+ES6: What is the difference between Rest and Spread?
